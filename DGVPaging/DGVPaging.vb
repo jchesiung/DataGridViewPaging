@@ -245,6 +245,9 @@ Public Class DGVPaging
 #Region "Data Settings"
     Private objDataSource As Object
 
+    <Browsable(True)> _
+    <DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)> _
+    <AttributeProvider("System.ComponentModel.IListSource")> _
     Public Property DataSource As Object
         Get
             Return objDataSource
