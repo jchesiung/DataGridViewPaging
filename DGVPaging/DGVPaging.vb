@@ -460,11 +460,11 @@ Public Class DGVPaging
 
         Select Case True
             Case TypeOf DataSource Is DataTable
-                intPages = Math.Floor((DirectCast(DataSource, DataTable).Rows.Count) / PageSize)
+                intPages = Math.Ceiling((DirectCast(DataSource, DataTable).Rows.Count) / PageSize)
             Case TypeOf DataSource Is List(Of Object)
-                intPages = Math.Floor((DirectCast(DataSource, List(Of Object)).ToDataTable().Rows.Count) / PageSize)
+                intPages = Math.Ceiling((DirectCast(DataSource, List(Of Object)).ToDataTable().Rows.Count) / PageSize)
             Case TypeOf DataSource Is IEnumerable
-                intPages = Math.Floor((DirectCast(DataSource, IEnumerable).ToDataTable().Rows.Count) / PageSize)
+                intPages = Math.Ceiling((DirectCast(DataSource, IEnumerable).ToDataTable().Rows.Count) / PageSize)
         End Select
 
         Select Case DirectCast(sender, Button).Name
@@ -609,7 +609,7 @@ Public Class DGVPaging
         For Each item In t
             result.ImportRow(item)
         Next
-        lblCounter.Text = String.Format("Page {0} of {1}", pageNumber, Math.Floor((dt.Rows.Count / PageSize)))
+        lblCounter.Text = String.Format("Page {0} of {1}", pageNumber, Math.Ceiling((dt.Rows.Count / PageSize)))
         Return result
     End Function
 #End Region
