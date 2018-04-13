@@ -1,14 +1,10 @@
-﻿Imports System.Drawing
-Imports System.Runtime.InteropServices
-Imports System.Windows.Forms
-
-
-
+Imports System.Drawing
 
 <ToolboxItem(True)>
 <ToolboxBitmap(GetType(DataGridView))>
 Public Class DGVPaging
 #Region "Public Properties"
+
 #Region "Buttons Settings"
     Public Property ButtonFirstText As String
         Get
@@ -16,24 +12,6 @@ Public Class DGVPaging
         End Get
         Set(value As String)
             btnFirst.Text = value
-        End Set
-    End Property
-
-    Public Property ButtonPreviousText As String
-        Get
-            Return btnPrevious.Text
-        End Get
-        Set(value As String)
-            btnPrevious.Text = value
-        End Set
-    End Property
-
-    Public Property ButtonNextText As String
-        Get
-            Return btnNext.Text
-        End Get
-        Set(value As String)
-            btnNext.Text = value
         End Set
     End Property
 
@@ -46,43 +24,23 @@ Public Class DGVPaging
         End Set
     End Property
 
-    Public Property ButtonsWidth As Integer
+    Public Property ButtonNextText As String
         Get
-            Return btnFirst.Width
+            Return btnNext.Text
         End Get
-        Set(value As Integer)
-            btnFirst.Width = value
-            btnLast.Width = value
-            btnNext.Width = value
-            btnPrevious.Width = value
+        Set(value As String)
+            btnNext.Text = value
         End Set
     End Property
 
-    Public Property ButtonsHeight As Integer
+    Public Property ButtonPreviousText As String
         Get
-            Return btnFirst.Height
+            Return btnPrevious.Text
         End Get
-        Set(value As Integer)
-            btnFirst.Height = value
-            btnLast.Height = value
-            btnNext.Height = value
-            btnPrevious.Height = value
-            lblCounter.Height = value
+        Set(value As String)
+            btnPrevious.Text = value
         End Set
     End Property
-
-    Public Property ButtonsFont As Font
-        Get
-            Return btnFirst.Font
-        End Get
-        Set(value As Font)
-            btnFirst.Font = value
-            btnLast.Font = value
-            btnNext.Font = value
-            btnPrevious.Font = value
-        End Set
-    End Property
-
     Public Property ButtonsBackColor As Color
         Get
             Return btnFirst.BackColor
@@ -107,6 +65,18 @@ Public Class DGVPaging
         End Set
     End Property
 
+    Public Property ButtonsFont As Font
+        Get
+            Return btnFirst.Font
+        End Get
+        Set(value As Font)
+            btnFirst.Font = value
+            btnLast.Font = value
+            btnNext.Font = value
+            btnPrevious.Font = value
+        End Set
+    End Property
+
     Public Property ButtonsForeColor As Color
         Get
             Return btnFirst.ForeColor
@@ -118,23 +88,75 @@ Public Class DGVPaging
             btnPrevious.ForeColor = value
         End Set
     End Property
+
+    Public Property ButtonsHeight As Integer
+        Get
+            Return btnFirst.Height
+        End Get
+        Set(value As Integer)
+            btnFirst.Height = value
+            btnLast.Height = value
+            btnNext.Height = value
+            btnPrevious.Height = value
+            lblCounter.Height = value
+        End Set
+    End Property
+
+    Public Property ButtonsWidth As Integer
+        Get
+            Return btnFirst.Width
+        End Get
+        Set(value As Integer)
+            btnFirst.Width = value
+            btnLast.Width = value
+            btnNext.Width = value
+            btnPrevious.Width = value
+        End Set
+    End Property
+#End Region
+
+#Region "Label Counter Settings"
+    Public Property LabelCounterFont As Font
+        Get
+            Return lblCounter.Font
+        End Get
+        Set(value As Font)
+            lblCounter.Font = value
+        End Set
+    End Property
+
+    Public Property LabelCounterBackColor As Color
+        Get
+            Return lblCounter.BackColor
+        End Get
+        Set(value As Color)
+            lblCounter.BackColor = value
+        End Set
+    End Property
+
+    Public Property LabelCounterForeColor As Color
+        Get
+            Return lblCounter.ForeColor
+        End Get
+        Set(value As Color)
+            lblCounter.ForeColor = value
+        End Set
+    End Property
 #End Region
 
 #Region "DataGridView Settings"
-    Private _defaultBackDisable As Color = Color.DimGray
-    Private _headerBackDisable As Color = Color.FromArgb(&H2A, &H2A, &H2A)
+    Private _altBackColor As Color
     Private _altBackDisable As Color = Color.Gray
-    Private _foreDisable As Color = Color.White
-
+    Private _altForeColor As Color
     Private _backgroundColor As Color
     Private _defaultBackColor As Color
-    Private _headerBackColor As Color
-    Private _selectedBackColor As Color
-    Private _altBackColor As Color
-
-    Private _headerForeColor As Color
+    Private _defaultBackDisable As Color = Color.DimGray
     Private _defaultForeColor As Color
-    Private _altForeColor As Color
+    Private _foreDisable As Color = Color.White
+    Private _headerBackColor As Color
+    Private _headerBackDisable As Color = Color.FromArgb(&H2A, &H2A, &H2A)
+    Private _headerForeColor As Color
+    Private _selectedBackColor As Color
     Private _selectedForeColor As Color
 
     Public Property CellStyleAlternatingRows As DataGridViewCellStyle
@@ -143,42 +165,6 @@ Public Class DGVPaging
         End Get
         Set(value As DataGridViewCellStyle)
             dgv.AlternatingRowsDefaultCellStyle = value
-        End Set
-    End Property
-
-    Public Property CellStyleColumnHeaders As DataGridViewCellStyle
-        Get
-            Return dgv.ColumnHeadersDefaultCellStyle
-        End Get
-        Set(value As DataGridViewCellStyle)
-            dgv.ColumnHeadersDefaultCellStyle = value
-        End Set
-    End Property
-
-    Public Property CellStyleDefaultRows As DataGridViewCellStyle
-        Get
-            Return dgv.DefaultCellStyle
-        End Get
-        Set(value As DataGridViewCellStyle)
-            dgv.DefaultCellStyle = value
-        End Set
-    End Property
-
-    Public Property CellStyleMultiSelection As Boolean
-        Get
-            Return dgv.MultiSelect
-        End Get
-        Set(value As Boolean)
-            dgv.MultiSelect = value
-        End Set
-    End Property
-
-    Public Property CellStyleSelectionMode As DataGridViewSelectionMode
-        Get
-            Return dgv.SelectionMode
-        End Get
-        Set(value As DataGridViewSelectionMode)
-            dgv.SelectionMode = value
         End Set
     End Property
 
@@ -209,12 +195,30 @@ Public Class DGVPaging
         End Set
     End Property
 
+    Public Property CellStyleColumnHeaders As DataGridViewCellStyle
+        Get
+            Return dgv.ColumnHeadersDefaultCellStyle
+        End Get
+        Set(value As DataGridViewCellStyle)
+            dgv.ColumnHeadersDefaultCellStyle = value
+        End Set
+    End Property
+
     Public Property CellStyleColumnHeadersHeight As Integer
         Get
             Return dgv.ColumnHeadersHeight
         End Get
         Set(value As Integer)
             dgv.ColumnHeadersHeight = value
+        End Set
+    End Property
+
+    Public Property CellStyleDefaultRows As DataGridViewCellStyle
+        Get
+            Return dgv.DefaultCellStyle
+        End Get
+        Set(value As DataGridViewCellStyle)
+            dgv.DefaultCellStyle = value
         End Set
     End Property
 
@@ -227,6 +231,15 @@ Public Class DGVPaging
         End Set
     End Property
 
+    Public Property CellStyleMultiSelection As Boolean
+        Get
+            Return dgv.MultiSelect
+        End Get
+        Set(value As Boolean)
+            dgv.MultiSelect = value
+        End Set
+    End Property
+
     Public Property CellStyleRowsHeight As Integer
         Get
             Return dgv.RowTemplate.Height
@@ -236,18 +249,36 @@ Public Class DGVPaging
         End Set
     End Property
 
-    Public Property CellStyleSelectionBorderWidth As Integer
-
     Public Property CellStyleSelectionBorderColor As Color
 
+    Public Property CellStyleSelectionBorderWidth As Integer
+
+    Public Property CellStyleSelectionMode As DataGridViewSelectionMode
+        Get
+            Return dgv.SelectionMode
+        End Get
+        Set(value As DataGridViewSelectionMode)
+            dgv.SelectionMode = value
+        End Set
+    End Property
+
+    Public Property ColumnsAlignment As List(Of DataGridViewContentAlignment)
+
+    Public Property ColumnsFormat As List(Of String)
+
+    Public Property ColumnsHeaderText As List(Of String)
+
+    Public Property ColumnsVisible As List(Of Boolean)
+
+    Public Property ColumnsWidth As List(Of Integer)
 #End Region
 
 #Region "Data Settings"
     Private objDataSource As Object
 
-    <Browsable(True)> _
-    <DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)> _
-    <AttributeProvider("System.ComponentModel.IListSource")> _
+    <Browsable(True)>
+    <DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)>
+    <AttributeProvider("System.ComponentModel.IListSource")>
     Public Property DataSource As Object
         Get
             Return objDataSource
@@ -260,39 +291,11 @@ Public Class DGVPaging
             End If
         End Set
     End Property
-
-    Public Property ColumnsHeaderText As List(Of String)
-
-    Public Property ColumnsWidth As List(Of Integer)
-
-    Public Property ColumnsVisible As List(Of Boolean)
-
-    Public Property ColumnsFormat As List(Of String)
-
-    Public Property ColumnsAlignment As List(Of DataGridViewContentAlignment)
-
 #End Region
 
-    <Browsable(True)>
-    <DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)>
-    Public Overloads Property Font As Font
-        Get
-            Return MyBase.Font
-        End Get
-        Set(value As Font)
-            MyBase.Font = value
-            dgv.Font = value
-        End Set
-    End Property
+    Private intCurrentPage As Integer
 
-    Public Property FontCounterLabel As Font
-        Get
-            Return lblCounter.Font
-        End Get
-        Set(value As Font)
-            lblCounter.Font = value
-        End Set
-    End Property
+    Private intPageSize As Integer
 
     <Browsable(True)>
     <DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)>
@@ -307,6 +310,27 @@ Public Class DGVPaging
         End Set
     End Property
 
+    Public Property CurrentPage As Integer
+        Get
+            Return intCurrentPage
+        End Get
+        Set(value As Integer)
+            intCurrentPage = value
+        End Set
+    End Property
+
+    <Browsable(True)>
+    <DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)>
+    Public Overloads Property Font As Font
+        Get
+            Return MyBase.Font
+        End Get
+        Set(value As Font)
+            MyBase.Font = value
+            dgv.Font = value
+        End Set
+    End Property
+
     <Browsable(True)>
     <DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)>
     Public Overloads Property ForeColor As Color
@@ -318,8 +342,6 @@ Public Class DGVPaging
             dgv.ForeColor = value
         End Set
     End Property
-
-    Private intPageSize As Integer
 
     Public Property PageSize As Integer
         Get
@@ -338,17 +360,6 @@ Public Class DGVPaging
             dgv.Dock = DockStyle.Fill
             dgv.ResumeLayout()
             Me.Invalidate()
-        End Set
-    End Property
-
-    Private intCurrentPage As Integer
-
-    Public Property CurrentPage As Integer
-        Get
-            Return intCurrentPage
-        End Get
-        Set(value As Integer)
-            intCurrentPage = value
         End Set
     End Property
 #End Region
@@ -380,77 +391,12 @@ Public Class DGVPaging
         Me.PageSize = 0
         Me.CurrentPage = 1
     End Sub
+
 #Region "Private Events"
-
-    Private Sub DGVPaging_Load(sender As Object, e As EventArgs) Handles Me.Load
-        Me.ColumnsHeaderText = New List(Of String)
-        Me.ColumnsAlignment = New List(Of DataGridViewContentAlignment)
-        Me.ColumnsFormat = New List(Of String)
-        Me.ColumnsVisible = New List(Of Boolean)
-        Me.ColumnsWidth = New List(Of Integer)
-        dgv.Select()
-    End Sub
-
-    Private Sub DGVPaging_Resize(sender As Object, e As EventArgs) Handles Me.Resize
-        dgv.SuspendLayout()
-        dgv.Dock = DockStyle.None
-        dgv.Dock = DockStyle.Fill
-        Me.RecalculateColumnsWidth()
-        dgv.ResumeLayout(True)
-    End Sub
-
-    Private Sub dgv_GotFocus(sender As Object, e As EventArgs) Handles dgv.GotFocus
-        Try
-            dgv.CurrentCell = dgv.Rows(0).Cells(0)
-        Catch ex As Exception
-
-        End Try
-    End Sub
-
-    Private Sub pnlButtons_Resize(sender As Object, e As EventArgs) Handles pnlButtons.Resize
-        Dim allControlsWidth As Integer = 0
-        For Each ctrl As Control In pnlButtons.Controls
-            allControlsWidth += ctrl.Margin.Left + ctrl.Margin.Right + ctrl.Width
-        Next
-        allControlsWidth -= btnFirst.Margin.Left
-
-        If pnlButtons.Width > allControlsWidth Then
-            btnFirst.Margin = New Padding(Math.Round((pnlButtons.Width - allControlsWidth) / 2, 0), btnFirst.Margin.Top, btnFirst.Margin.Right, btnFirst.Margin.Bottom)
-        End If
-    End Sub
-
-    Private Sub _RowPostPaint(sender As Object, e As DataGridViewRowPostPaintEventArgs) Handles dgv.RowPostPaint
-        If dgv.Rows(e.RowIndex).Selected Then
-            Using p As New Pen(CellStyleSelectionBorderColor)
-                Dim pWidth As Integer = CellStyleSelectionBorderWidth
-                p.Width = pWidth
-
-                Dim sWidth As Integer = 0
-                For Each c As DataGridViewColumn In dgv.Columns
-                    If c.Visible Then
-                        sWidth += c.Width
-                    End If
-                Next
-
-                Dim x As Integer = e.RowBounds.Left + (pWidth / 2)
-                Dim y As Integer = e.RowBounds.Top + (pWidth / 2)
-                Dim w As Integer = sWidth - pWidth
-                Dim h As Integer = e.RowBounds.Height - pWidth
-
-                e.Graphics.DrawRectangle(p, x, y, w, h)
-            End Using
-        End If
-    End Sub
 
     Protected Overrides Sub OnEnabledChanged(e As EventArgs)
         MyBase.OnEnabledChanged(e)
         SetEnabled(MyBase.Enabled)
-    End Sub
-
-    Private Sub _DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs) Handles dgv.DataBindingComplete
-        Me.SuspendLayout()
-        Me.RecalculateColumnsWidth()
-        Me.ResumeLayout(True)
     End Sub
 
     Private Sub ButtonsClick(sender As Object, e As EventArgs) Handles btnFirst.Click, btnLast.Click, btnNext.Click, btnPrevious.Click
@@ -482,6 +428,84 @@ Public Class DGVPaging
         Me.FormatGrid()
         dgv.ResumeLayout(True)
         dgv.Select()
+    End Sub
+
+    Private Sub DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs) Handles dgv.DataBindingComplete
+        Me.SuspendLayout()
+        Me.RecalculateColumnsWidth()
+        Me.ResumeLayout(True)
+    End Sub
+
+    Private Sub dgv_GotFocus(sender As Object, e As EventArgs) Handles dgv.GotFocus
+        Try
+            dgv.CurrentCell = dgv.Rows(0).Cells(0)
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub dgv_KeyDown(sender As Object, e As KeyEventArgs) Handles dgv.KeyDown
+        If e.KeyCode = Keys.Right Then
+            btnNext.PerformClick()
+        ElseIf e.KeyCode = Keys.Left Then
+            btnPrevious.PerformClick()
+        ElseIf e.KeyCode = Keys.Home Then
+            btnFirst.PerformClick()
+        ElseIf e.KeyCode = Keys.End Then
+            btnLast.PerformClick()
+        End If
+    End Sub
+
+    Private Sub DGVPaging_Load(sender As Object, e As EventArgs) Handles Me.Load
+        Me.ColumnsHeaderText = New List(Of String)
+        Me.ColumnsAlignment = New List(Of DataGridViewContentAlignment)
+        Me.ColumnsFormat = New List(Of String)
+        Me.ColumnsVisible = New List(Of Boolean)
+        Me.ColumnsWidth = New List(Of Integer)
+        dgv.Select()
+    End Sub
+
+    Private Sub DGVPaging_Resize(sender As Object, e As EventArgs) Handles Me.Resize
+        dgv.SuspendLayout()
+        dgv.Dock = DockStyle.None
+        dgv.Dock = DockStyle.Fill
+        Me.RecalculateColumnsWidth()
+        dgv.ResumeLayout(True)
+    End Sub
+
+    Private Sub pnlButtons_Resize(sender As Object, e As EventArgs) Handles pnlButtons.Resize
+        Dim allControlsWidth As Integer = 0
+        For Each ctrl As Control In pnlButtons.Controls
+            allControlsWidth += ctrl.Margin.Left + ctrl.Margin.Right + ctrl.Width
+        Next
+        allControlsWidth -= btnFirst.Margin.Left
+
+        If pnlButtons.Width > allControlsWidth Then
+            btnFirst.Margin = New Padding(Math.Round((pnlButtons.Width - allControlsWidth) / 2, 0), btnFirst.Margin.Top, btnFirst.Margin.Right, btnFirst.Margin.Bottom)
+        End If
+    End Sub
+
+    Private Sub RowPostPaint(sender As Object, e As DataGridViewRowPostPaintEventArgs) Handles dgv.RowPostPaint
+        If dgv.Rows(e.RowIndex).Selected Then
+            Using p As New Pen(CellStyleSelectionBorderColor)
+                Dim pWidth As Integer = CellStyleSelectionBorderWidth
+                p.Width = pWidth
+
+                Dim sWidth As Integer = 0
+                For Each c As DataGridViewColumn In dgv.Columns
+                    If c.Visible Then
+                        sWidth += c.Width
+                    End If
+                Next
+
+                Dim x As Integer = e.RowBounds.Left + (pWidth / 2)
+                Dim y As Integer = e.RowBounds.Top + (pWidth / 2)
+                Dim w As Integer = sWidth - pWidth
+                Dim h As Integer = e.RowBounds.Height - pWidth
+
+                e.Graphics.DrawRectangle(p, x, y, w, h)
+            End Using
+        End If
     End Sub
 #End Region
 
@@ -521,6 +545,38 @@ Public Class DGVPaging
         Me.RecalculateColumnsWidth()
     End Sub
 
+    Private Sub RecalculateColumnsWidth()
+        If DesignMode Then Exit Sub
+
+        dgv.SuspendLayout()
+        Dim w As Double = Me.ClientRectangle.Width
+
+        Dim xWidth As Integer = Me.ClientSize.Width
+        If QueryScrollControl.HasVerticalScrollbar(dgv) Then
+            xWidth -= SystemInformation.VerticalScrollBarWidth
+        End If
+
+        Dim ColsWidth As Integer = 0
+        Dim result As Integer
+
+        For Each c As DataGridViewColumn In dgv.Columns
+            ColsWidth += c.Width
+        Next
+        For Each c As DataGridViewColumn In dgv.Columns
+            result = CInt((CSng(c.Width) / CSng(ColsWidth)) * CSng(xWidth))
+            c.Width = result
+        Next
+        dgv.Width = CInt(w - (w * 0.3))
+
+        dgv.ResumeLayout()
+
+        Try
+            dgv.CurrentCell = dgv.Rows(0).Cells(0)
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
     Private Sub SetEnabled(enabled As Boolean)
         If Not enabled Then
             _backgroundColor = dgv.BackgroundColor
@@ -558,32 +614,6 @@ Public Class DGVPaging
             dgv.DefaultCellStyle.SelectionForeColor = _selectedForeColor
         End If
     End Sub
-
-    Private Sub RecalculateColumnsWidth()
-        If DesignMode Then Exit Sub
-
-        dgv.SuspendLayout()
-        Dim w As Double = Me.ClientRectangle.Width
-
-        Dim xWidth As Integer = Me.ClientSize.Width - 5
-        If QueryScrollControl.HasVerticalScrollbar(dgv) Then
-            xWidth -= SystemInformation.VerticalScrollBarWidth
-        End If
-
-        Dim ColsWidth As Integer = 0
-        Dim result As Integer
-
-        For Each c As DataGridViewColumn In dgv.Columns
-            ColsWidth += c.Width
-        Next
-        For Each c As DataGridViewColumn In dgv.Columns
-            result = CInt((CSng(c.Width) / CSng(ColsWidth)) * CSng(xWidth))
-            c.Width = result
-        Next
-        dgv.Width = CInt(w - (w * 0.3))
-        dgv.ResumeLayout()
-    End Sub
-
     Private Function ShowData(ByVal pageNumber As Integer) As DataTable
         Dim dt As New DataTable
         Dim result As New DataTable
