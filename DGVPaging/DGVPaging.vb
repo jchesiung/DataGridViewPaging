@@ -643,4 +643,19 @@ Public Class DGVPaging
         Return result
     End Function
 #End Region
+
+#Region "Public Methods"
+    Public Function GetSelectedRows() As DataTable
+        Dim result As New DataTable
+
+        For Each col As DataGridViewColumn In dgv.Columns
+            result.Columns.Add(col.Name)
+        Next
+        For Each row As DataGridViewRow In dgv.SelectedRows
+            Dim a As DataRowView = DirectCast(row.DataBoundItem, DataRowView)
+            result.ImportRow(a.Row)
+        Next
+        Return result
+    End Function
+#End Region
 End Class
