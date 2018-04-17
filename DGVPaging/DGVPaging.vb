@@ -646,15 +646,9 @@ Public Class DGVPaging
 
 #Region "Public Methods"
     Public Function GetSelectedRows() As DataTable
-        Dim result As New DataTable
-
-        For Each col As DataGridViewColumn In dgv.Columns
-            result.Columns.Add(col.Name)
-        Next
-        For Each row As DataGridViewRow In dgv.SelectedRows
-            Dim a As DataRowView = DirectCast(row.DataBoundItem, DataRowView)
-            result.ImportRow(a.Row)
-        Next
+        Dim result = (From row As DataGridViewRow In dgv.SelectedRows
+                      Select DirectCast(row.DataBoundItem, DataRowView).Row).CopyToDataTable
+    
         Return result
     End Function
 #End Region
